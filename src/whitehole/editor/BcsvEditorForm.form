@@ -111,6 +111,14 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subLightDataActionPerformed"/>
                   </Events>
                 </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subChangeSceneListInfo">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="ChangeSceneListInfo"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subChangeSceneListInfoActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JPopupMenu$Separator" name="sep2">
                 </MenuItem>
                 <Menu class="javax.swing.JMenu" name="mnuUseResource">
@@ -216,6 +224,24 @@
                     </MenuItem>
                   </SubComponents>
                 </Menu>
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="sep3">
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subScenarioSettings">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="ScenarioSettings"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subScenarioSettingsActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subStageInfo">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="StageInfo"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subStageInfoActionPerformed"/>
+                  </Events>
+                </MenuItem>
               </SubComponents>
             </Menu>
             <Menu class="javax.swing.JMenu" name="mnuObjects">
@@ -366,7 +392,7 @@
                     </MenuItem>
                   </SubComponents>
                 </Menu>
-                <MenuItem class="javax.swing.JPopupMenu$Separator" name="sep3">
+                <MenuItem class="javax.swing.JPopupMenu$Separator" name="sep4">
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="mniObjectInfluenceTable">
                   <Properties>
@@ -415,6 +441,22 @@
                 <Property name="text" type="java.lang.String" value="System"/>
               </Properties>
               <SubComponents>
+                <MenuItem class="javax.swing.JMenuItem" name="subHeapSizeExcept">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="HeapSizeExcept"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subHeapSizeExceptActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subMarioFaceShipEventDataTable">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="MarioFaceShipEventDataTable"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMarioFaceShipEventDataTableActionPerformed"/>
+                  </Events>
+                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="subGalaxyDataTable">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="GalaxyDataTable"/>
@@ -431,28 +473,12 @@
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subGalaxyWorldOrderListActionPerformed"/>
                   </Events>
                 </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="subMarioFaceShipEventDataTable">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="MarioFaceShipEventDataTable"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMarioFaceShipEventDataTableActionPerformed"/>
-                  </Events>
-                </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="subMarioFaceShipEventCastTable">
                   <Properties>
                     <Property name="text" type="java.lang.String" value="MarioFaceShipEventCastTable"/>
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subMarioFaceShipEventCastTableActionPerformed"/>
-                  </Events>
-                </MenuItem>
-                <MenuItem class="javax.swing.JMenuItem" name="subHeapSizeExcept">
-                  <Properties>
-                    <Property name="text" type="java.lang.String" value="HeapSizeExcept"/>
-                  </Properties>
-                  <Events>
-                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subHeapSizeExceptActionPerformed"/>
                   </Events>
                 </MenuItem>
                 <MenuItem class="javax.swing.JMenuItem" name="subWorldMapHeapGalaxy">
@@ -469,6 +495,38 @@
                   </Properties>
                   <Events>
                     <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subWorldMapHeapResourceActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subGameEventValueTable">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="GameEventValueTable"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subGameEventValueTableActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subGameSettings">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="GameSettings"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subGameSettingsActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subHubworldStarReturnDataTable">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="HubworldStarReturnDataTable"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subHubworldStarReturnDataTableActionPerformed"/>
+                  </Events>
+                </MenuItem>
+                <MenuItem class="javax.swing.JMenuItem" name="subSavePointList">
+                  <Properties>
+                    <Property name="text" type="java.lang.String" value="SavePointList"/>
+                  </Properties>
+                  <Events>
+                    <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="subSavePointListActionPerformed"/>
                   </Events>
                 </MenuItem>
               </SubComponents>

@@ -35,10 +35,15 @@ public class GameArchive {
     private List<String> planets = new ArrayList(256);
     private int gameType = 0;
     private boolean hasOverwrittenDB;
+    private boolean hasGLE = false;
     
     public GameArchive(FilesystemBase fs) {
         filesystem = fs;
         
+        if (filesystem.fileExists("/ScenarioData/FileSelect.reg")) {
+            hasGLE = true;
+        }
+                
         // Determine game type using ObjNameTable's location
         if (filesystem.fileExists("/StageData/ObjNameTable.arc")) {
             gameType = 1;
@@ -100,6 +105,10 @@ public class GameArchive {
     
     public int getGameType() {
         return gameType;
+    }
+    
+    public boolean existsGLE() {
+        return hasGLE;
     }
     
     public List<String> getGalaxyList() {

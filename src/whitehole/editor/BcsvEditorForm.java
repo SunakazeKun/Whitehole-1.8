@@ -44,8 +44,11 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         tableModel.setColumnCount(0);
         
         boolean isSmg1 = Whitehole.getCurrentGameType() == 1;
+        boolean hasGLE = Whitehole.isGalaxyLevelEngine();
         
         sep1.setVisible(!isSmg1);
+        sep2.setVisible(!isSmg1);
+        sep3.setVisible(hasGLE);
         mnuUseResource.setVisible(!isSmg1);
         mnuAudio.setVisible(!isSmg1);
         mnuSystem.setVisible(!isSmg1);
@@ -61,6 +64,17 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         mniRushInfluenceTable.setVisible(!isSmg1);
         mniMorphConditionTable.setVisible(!isSmg1);
         subAstroNamePlateData.setVisible(isSmg1);
+        subChangeSceneListInfo.setVisible(!isSmg1);
+        subScenarioSettings.setVisible(hasGLE);
+        subStageInfo.setVisible(hasGLE);
+        subMarioFaceShipEventCastTable.setVisible(!hasGLE);
+        subWorldMapHeapGalaxy.setVisible(!hasGLE);
+        subWorldMapHeapResource.setVisible(!hasGLE);
+        subGalaxyDataTable.setVisible(!hasGLE);
+        subSavePointList.setVisible(hasGLE);
+        subHubworldStarReturnDataTable.setVisible(hasGLE);
+        subGameSettings.setVisible(hasGLE);
+        subGameEventValueTable.setVisible(hasGLE);
         
         if (isSmg1) {
             tbArchiveName.setText("/StageData/CocoonExGalaxy/CocoonExGalaxyScenario.arc");
@@ -69,6 +83,13 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         else {
             tbArchiveName.setText("/StageData/RedBlueExGalaxy/RedBlueExGalaxyScenario.arc");
             tbFileName.setText("/RedBlueExGalaxyScenario/ScenarioData.bcsv");
+        }
+        if (hasGLE) {
+            subMarioFaceShipEventDataTable.setText("HubworldEventDataTable");
+            subGalaxyWorldOrderList.setText("GalaxyOrderList");
+        } else {
+            subMarioFaceShipEventDataTable.setText("MarioFaceShipEventDataTable");
+            subGalaxyWorldOrderList.setText("GalaxyWorldOrderList");
         }
     }
     
@@ -240,6 +261,7 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         subCameraParam = new javax.swing.JMenuItem();
         subLightDataZone = new javax.swing.JMenuItem();
         subLightData = new javax.swing.JMenuItem();
+        subChangeSceneListInfo = new javax.swing.JMenuItem();
         sep2 = new javax.swing.JPopupMenu.Separator();
         mnuUseResource = new javax.swing.JMenu();
         subURcommon = new javax.swing.JMenuItem();
@@ -254,6 +276,9 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         subURsound1 = new javax.swing.JMenuItem();
         subURsound2 = new javax.swing.JMenuItem();
         subURsound3 = new javax.swing.JMenuItem();
+        sep3 = new javax.swing.JPopupMenu.Separator();
+        subScenarioSettings = new javax.swing.JMenuItem();
+        subStageInfo = new javax.swing.JMenuItem();
         mnuObjects = new javax.swing.JMenu();
         subPlanetMapData = new javax.swing.JMenuItem();
         subProductMapObjData = new javax.swing.JMenuItem();
@@ -273,20 +298,24 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         subTicoFatCoin = new javax.swing.JMenuItem();
         subTicoShop = new javax.swing.JMenuItem();
         subTicoShopDice = new javax.swing.JMenuItem();
-        sep3 = new javax.swing.JPopupMenu.Separator();
+        sep4 = new javax.swing.JPopupMenu.Separator();
         mniObjectInfluenceTable = new javax.swing.JMenuItem();
         mniRushInfluenceTable = new javax.swing.JMenuItem();
         mniMorphConditionTable = new javax.swing.JMenuItem();
         subAstroNamePlateData = new javax.swing.JMenuItem();
         subWorldMapCamera = new javax.swing.JMenuItem();
         mnuSystem = new javax.swing.JMenu();
+        subHeapSizeExcept = new javax.swing.JMenuItem();
+        subMarioFaceShipEventDataTable = new javax.swing.JMenuItem();
         subGalaxyDataTable = new javax.swing.JMenuItem();
         subGalaxyWorldOrderList = new javax.swing.JMenuItem();
-        subMarioFaceShipEventDataTable = new javax.swing.JMenuItem();
         subMarioFaceShipEventCastTable = new javax.swing.JMenuItem();
-        subHeapSizeExcept = new javax.swing.JMenuItem();
         subWorldMapHeapGalaxy = new javax.swing.JMenuItem();
         subWorldMapHeapResource = new javax.swing.JMenuItem();
+        subGameEventValueTable = new javax.swing.JMenuItem();
+        subGameSettings = new javax.swing.JMenuItem();
+        subHubworldStarReturnDataTable = new javax.swing.JMenuItem();
+        subSavePointList = new javax.swing.JMenuItem();
         mnuAudio = new javax.swing.JMenu();
         subStageBgmInfo = new javax.swing.JMenuItem();
         subScenarioBgmInfo = new javax.swing.JMenuItem();
@@ -498,6 +527,14 @@ public class BcsvEditorForm extends javax.swing.JFrame {
             }
         });
         mnuStages.add(subLightData);
+
+        subChangeSceneListInfo.setText("ChangeSceneListInfo");
+        subChangeSceneListInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subChangeSceneListInfoActionPerformed(evt);
+            }
+        });
+        mnuStages.add(subChangeSceneListInfo);
         mnuStages.add(sep2);
 
         mnuUseResource.setText("UseResource");
@@ -599,6 +636,23 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         mnuUseResource.add(subURsound3);
 
         mnuStages.add(mnuUseResource);
+        mnuStages.add(sep3);
+
+        subScenarioSettings.setText("ScenarioSettings");
+        subScenarioSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subScenarioSettingsActionPerformed(evt);
+            }
+        });
+        mnuStages.add(subScenarioSettings);
+
+        subStageInfo.setText("StageInfo");
+        subStageInfo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subStageInfoActionPerformed(evt);
+            }
+        });
+        mnuStages.add(subStageInfo);
 
         mnuOpen.add(mnuStages);
 
@@ -743,7 +797,7 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         mnuNPCData.add(subTicoShopDice);
 
         mnuObjects.add(mnuNPCData);
-        mnuObjects.add(sep3);
+        mnuObjects.add(sep4);
 
         mniObjectInfluenceTable.setText("ObjectInfluenceTable");
         mniObjectInfluenceTable.addActionListener(new java.awt.event.ActionListener() {
@@ -789,6 +843,22 @@ public class BcsvEditorForm extends javax.swing.JFrame {
 
         mnuSystem.setText("System");
 
+        subHeapSizeExcept.setText("HeapSizeExcept");
+        subHeapSizeExcept.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subHeapSizeExceptActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(subHeapSizeExcept);
+
+        subMarioFaceShipEventDataTable.setText("MarioFaceShipEventDataTable");
+        subMarioFaceShipEventDataTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subMarioFaceShipEventDataTableActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(subMarioFaceShipEventDataTable);
+
         subGalaxyDataTable.setText("GalaxyDataTable");
         subGalaxyDataTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -805,14 +875,6 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         });
         mnuSystem.add(subGalaxyWorldOrderList);
 
-        subMarioFaceShipEventDataTable.setText("MarioFaceShipEventDataTable");
-        subMarioFaceShipEventDataTable.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subMarioFaceShipEventDataTableActionPerformed(evt);
-            }
-        });
-        mnuSystem.add(subMarioFaceShipEventDataTable);
-
         subMarioFaceShipEventCastTable.setText("MarioFaceShipEventCastTable");
         subMarioFaceShipEventCastTable.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -820,14 +882,6 @@ public class BcsvEditorForm extends javax.swing.JFrame {
             }
         });
         mnuSystem.add(subMarioFaceShipEventCastTable);
-
-        subHeapSizeExcept.setText("HeapSizeExcept");
-        subHeapSizeExcept.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                subHeapSizeExceptActionPerformed(evt);
-            }
-        });
-        mnuSystem.add(subHeapSizeExcept);
 
         subWorldMapHeapGalaxy.setText("WorldMapHeapGalaxy");
         subWorldMapHeapGalaxy.addActionListener(new java.awt.event.ActionListener() {
@@ -844,6 +898,38 @@ public class BcsvEditorForm extends javax.swing.JFrame {
             }
         });
         mnuSystem.add(subWorldMapHeapResource);
+
+        subGameEventValueTable.setText("GameEventValueTable");
+        subGameEventValueTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subGameEventValueTableActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(subGameEventValueTable);
+
+        subGameSettings.setText("GameSettings");
+        subGameSettings.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subGameSettingsActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(subGameSettings);
+
+        subHubworldStarReturnDataTable.setText("HubworldStarReturnDataTable");
+        subHubworldStarReturnDataTable.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subHubworldStarReturnDataTableActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(subHubworldStarReturnDataTable);
+
+        subSavePointList.setText("SavePointList");
+        subSavePointList.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                subSavePointListActionPerformed(evt);
+            }
+        });
+        mnuSystem.add(subSavePointList);
 
         mnuOpen.add(mnuSystem);
 
@@ -1143,11 +1229,19 @@ public class BcsvEditorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_subGalaxyDataTableActionPerformed
 
     private void subGalaxyWorldOrderListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subGalaxyWorldOrderListActionPerformed
-        handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/GalaxyWorldOrderList.bcsv");
+        if (Whitehole.isGalaxyLevelEngine()) {
+            handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/GalaxyOrderList.bcsv");
+        } else {
+            handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/GalaxyWorldOrderList.bcsv");
+        }
     }//GEN-LAST:event_subGalaxyWorldOrderListActionPerformed
 
     private void subMarioFaceShipEventDataTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMarioFaceShipEventDataTableActionPerformed
+        if (Whitehole.isGalaxyLevelEngine()) {
+        handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/HubworldEventDataTable.bcsv");
+        } else {
         handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/MarioFaceShipEventDataTable.bcsv");
+        }
     }//GEN-LAST:event_subMarioFaceShipEventDataTableActionPerformed
 
     private void subMarioFaceShipEventCastTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subMarioFaceShipEventCastTableActionPerformed
@@ -1310,6 +1404,52 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         handleShortcut("/ObjectData/MarioConst.arc", "/MarioConst/ActorInfo/MorphConditionTable.bcsv");
     }//GEN-LAST:event_mniMorphConditionTableActionPerformed
 
+    private void subChangeSceneListInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subChangeSceneListInfoActionPerformed
+        String stage = getTextInput("Enter the zone's file name: ");
+        
+        if (stage != null && !stage.isEmpty()) {
+            String archiveName = String.format("/StageData/%s/%sMap.arc", stage, stage);
+            String bcsvName = String.format("/Stage/jmp/List/ChangeSceneListInfo", stage);
+            handleShortcut(archiveName, bcsvName);
+        }
+    }//GEN-LAST:event_subChangeSceneListInfoActionPerformed
+
+    private void subScenarioSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subScenarioSettingsActionPerformed
+        String stage = getTextInput("Enter the galaxy's file name: ");
+        
+        if (stage != null && !stage.isEmpty()) {
+            String archiveName = String.format("/StageData/%s/%sMap.arc", stage, stage);
+            String bcsvName = String.format("/Stage/jmp/List/ScenarioSettings", stage);
+            handleShortcut(archiveName, bcsvName);
+        }
+    }//GEN-LAST:event_subScenarioSettingsActionPerformed
+
+    private void subStageInfoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subStageInfoActionPerformed
+        String stage = getTextInput("Enter the galaxy's file name: ");
+        
+        if (stage != null && !stage.isEmpty()) {
+            String archiveName = String.format("/StageData/%s/%sMap.arc", stage, stage);
+            String bcsvName = String.format("/Stage/jmp/List/StageInfo", stage);
+            handleShortcut(archiveName, bcsvName);
+        }
+    }//GEN-LAST:event_subStageInfoActionPerformed
+
+    private void subGameEventValueTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subGameEventValueTableActionPerformed
+        handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/GameEventValueTable.bcsv");
+    }//GEN-LAST:event_subGameEventValueTableActionPerformed
+
+    private void subGameSettingsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subGameSettingsActionPerformed
+        handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/GameSettings.bcsv");
+    }//GEN-LAST:event_subGameSettingsActionPerformed
+
+    private void subSavePointListActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subSavePointListActionPerformed
+        handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/SavePointList.bcsv");
+    }//GEN-LAST:event_subSavePointListActionPerformed
+
+    private void subHubworldStarReturnDataTableActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_subHubworldStarReturnDataTableActionPerformed
+        handleShortcut("/ObjectData/SystemDataTable.arc", "/SystemDataTable/HubworldStarReturnDataTable.bcsv");
+    }//GEN-LAST:event_subHubworldStarReturnDataTableActionPerformed
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     public javax.swing.JButton btnAddRow;
     private javax.swing.JButton btnClear;
@@ -1337,6 +1477,7 @@ public class BcsvEditorForm extends javax.swing.JFrame {
     private javax.swing.JPopupMenu.Separator sep1;
     private javax.swing.JPopupMenu.Separator sep2;
     private javax.swing.JPopupMenu.Separator sep3;
+    private javax.swing.JPopupMenu.Separator sep4;
     private javax.swing.JToolBar.Separator spr2;
     private javax.swing.JToolBar.Separator spr3;
     private javax.swing.JToolBar.Separator spr5;
@@ -1348,12 +1489,16 @@ public class BcsvEditorForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem subBgmParam;
     private javax.swing.JMenuItem subCameraParam;
     private javax.swing.JMenuItem subCaretaker;
+    private javax.swing.JMenuItem subChangeSceneListInfo;
     private javax.swing.JMenuItem subClose;
     private javax.swing.JMenuItem subGalaxyDataTable;
     private javax.swing.JMenuItem subGalaxyInfo;
     private javax.swing.JMenuItem subGalaxyWorldOrderList;
+    private javax.swing.JMenuItem subGameEventValueTable;
+    private javax.swing.JMenuItem subGameSettings;
     private javax.swing.JMenuItem subHeapSizeExcept;
     private javax.swing.JMenuItem subHoneyBee;
+    private javax.swing.JMenuItem subHubworldStarReturnDataTable;
     private javax.swing.JMenuItem subKinopio;
     private javax.swing.JMenuItem subKinopioBank;
     private javax.swing.JMenuItem subLightData;
@@ -1370,10 +1515,13 @@ public class BcsvEditorForm extends javax.swing.JFrame {
     private javax.swing.JMenuItem subPlanetMapData;
     private javax.swing.JMenuItem subProductMapObjData;
     private javax.swing.JMenuItem subSave;
+    private javax.swing.JMenuItem subSavePointList;
     private javax.swing.JMenuItem subScenarioBgmInfo;
     private javax.swing.JMenuItem subScenarioData;
+    private javax.swing.JMenuItem subScenarioSettings;
     private javax.swing.JMenuItem subSoundIdToInstList;
     private javax.swing.JMenuItem subStageBgmInfo;
+    private javax.swing.JMenuItem subStageInfo;
     private javax.swing.JMenuItem subTicoComet;
     private javax.swing.JMenuItem subTicoFat;
     private javax.swing.JMenuItem subTicoFatCoin;
