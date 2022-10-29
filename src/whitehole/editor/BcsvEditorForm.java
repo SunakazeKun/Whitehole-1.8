@@ -64,7 +64,7 @@ public class BcsvEditorForm extends javax.swing.JFrame {
         mniRushInfluenceTable.setVisible(!isSmg1);
         mniMorphConditionTable.setVisible(!isSmg1);
         subAstroNamePlateData.setVisible(isSmg1);
-        subChangeSceneListInfo.setVisible(!isSmg1);
+        subChangeSceneListInfo.setVisible(hasGLE);
         subScenarioSettings.setVisible(hasGLE);
         subStageInfo.setVisible(hasGLE);
         subMarioFaceShipEventCastTable.setVisible(!hasGLE);

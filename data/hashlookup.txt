@@ -1499,6 +1499,7 @@ NoStopClock
 PageNumber
 PlayAttackMan
 Player
+PowerStarColor
 RaceId
 RaceTutorial
 RequireScenarioName1
