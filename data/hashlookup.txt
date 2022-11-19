@@ -1469,6 +1469,7 @@ Sensorstalk
 SensorstalkStepMax
 SensorstalkStepMin
 ### GLE
+ChangeType
 CompletePane
 EntireLevelFlag
 EntryPathId
@@ -1496,6 +1497,7 @@ NoPauseExit
 NoPauseReturn
 NoStarChance
 NoStopClock
+MuteType
 PageNumber
 PlayAttackMan
 Player

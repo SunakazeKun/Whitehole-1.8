@@ -113,6 +113,10 @@ public class Whitehole {
         return GAME != null ? GAME.existsGLE() : false;
     }
     
+    public static boolean doesArchiveExist(String archivePath) {
+        return GAME != null ? GAME.existsArchive(archivePath) : false;
+    }
+    
     public static FilesystemBase getCurrentGameFileSystem() {
         return GAME != null ? GAME.getFileSystem() : null;
     }

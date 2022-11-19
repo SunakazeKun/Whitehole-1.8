@@ -1,0 +1,987 @@
+{
+	"MenuElements": [
+		{
+			"DefaultName": "Stages",
+			"Type": "Menu",
+			"MenuElements": [
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ScenarioData",
+					"DefaultArchivePath": "/StageData/%s/%sScenario.arc",
+					"DefaultBcsvPath": "/%sScenario/ScenarioData.bcsv",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName"
+						},
+						{
+							"VariableName": "StageName"
+						}
+					]
+				}, 
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ZoneList",
+					"DefaultArchivePath": "/StageData/%s/%sScenario.arc",
+					"DefaultBcsvPath": "/%sScenario/ZoneList.bcsv",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName"
+						},
+						{
+							"VariableName": "StageName"
+						}
+					]
+				}, 
+				{
+					"Type": "Shortcut",
+					"DefaultName": "GalaxyInfo",
+					"DefaultArchivePath": "/StageData/%s/%sScenario.arc",
+					"DefaultBcsvPath": "/%sScenario/GalaxyInfo.bcsv",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName"
+						},
+						{
+							"VariableName": "StageName"
+						}
+					],
+					"RequiredFile": "SMG2"
+				}, 
+				{
+					"Type": "Shortcut",
+					"DefaultName": "StageObjInfo",
+					"DefaultArchivePath": "/StageData/%s/%sMap.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/StageData/%s.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/jmp/Placement/%s/StageObjInfo",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						},
+						{
+							"VariableName": "StageName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "Layer",
+							"VariableGetMessage": "Enter the layer (ex. 'LayerP' NOT 'P'):"
+						}
+					]
+				},
+				{
+					"Type": "Separator"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Camera",
+					"DefaultArchivePath": "/StageData/%s/%sMap.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/StageData/%s.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/camera/CameraParam.bcam",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName",
+							"RequiredFile": "SMG2"
+						}
+					]
+				}, 
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Light",
+					"DefaultArchivePath": "/StageData/%s/%sLight.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/LightData.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/csv/%sLight.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/LightData/Light%s.bcsv",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "StageName",
+							"RequiredFile": "SMG2"
+						}
+					]
+				}, 
+				{
+					"Type": "Shortcut",
+					"DefaultName": "LightData",
+					"DefaultArchivePath": "/LightData/LightData.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/LightData.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/LightData/LightData.bcsv"
+				}, 
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ChangeSceneListInfo",
+					"DefaultArchivePath": "/StageData/%s/%sMap.arc",
+					"DefaultBcsvPath": "/Stage/jmp/List/ChangeSceneListInfo",
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:"
+						}, 
+						{
+							"VariableName": "ZoneName"
+						},
+						{
+							"VariableName": "ZoneName"
+						}
+					],
+					"RequiredFile": "GLE"
+				},
+				{
+					"Type": "Separator",
+					"RequiredFile": "SMG2"
+				},
+				{
+					"Type": "Menu",
+					"DefaultName": "UseResource",
+					"RequiredFile": "SMG2",
+					"MenuElements": [
+						{
+							"Type": "Shortcut",
+							"DefaultName": "common",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/common.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "scenario_1",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/scenario_1.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "scenario_2",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/scenario_2.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "scenario_3",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/scenario_3.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "wave_arc_common",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/wave_arc_common.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "wave_arc_scenario_1",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/wave_arc_scenario_1.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "wave_arc_scenario_2",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/wave_arc_scenario_2.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "wave_arc_scenario_3",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/wave_arc_scenario_3.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "sound_common",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/sound_common.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "sound_scenario_1",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/sound_scenario_1.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "sound_scenario_2",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/sound_scenario_2.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}, 
+						{
+							"Type": "Shortcut",
+							"DefaultName": "sound_scenario_3",
+							"DefaultArchivePath": "/StageData/%s/%sUseResource.arc",
+							"DefaultBcsvPath": "/Stage/csv/sound_scenario_3.bcsv",
+							"Variables": [
+								{
+									"VariableName": "StageName",
+									"VariableGetMessage": "Enter the stage's file name:"
+								}, 
+								{
+									"VariableName": "StageName",
+									"RequiredFile": "SMG2"
+								}
+							]
+						}
+					]
+				},
+				{
+					"Type": "Separator",
+					"RequiredFile": "GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ScenarioSettings",
+					"DefaultArchivePath": "/StageData/%s/%sMap.arc",
+					"DefaultBcsvPath": "/Stage/jmp/List/ScenarioSettings",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName"
+						}
+					],
+					"RequiredFile": "GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "StageInfo",
+					"DefaultArchivePath": "/StageData/%s/%sMap.arc",
+					"DefaultBcsvPath": "/Stage/jmp/List/StageInfo",
+					"Variables": [
+						{
+							"VariableName": "StageName",
+							"VariableGetMessage": "Enter the stage's file name:"
+						}, 
+						{
+							"VariableName": "StageName"
+						}
+					],
+					"RequiredFile": "GLE"
+				}
+			]
+		},
+		{
+			"DefaultName": "Objects",
+			"Type": "Menu",
+			"MenuElements": [
+				{
+					"Type": "Shortcut",
+					"DefaultName": "PlanetMapDataTable",
+					"DefaultArchivePath": "/ObjectData/PlanetMapDataTable.arc",
+					"DefaultBcsvPath": "/PlanetMapDataTable/PlanetMapDataTable.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ProductMapObjDataTable",
+					"DefaultArchivePath": "/ObjectData/ProductMapObjDataTable.arc",
+					"DefaultBcsvPath": "/ProductMapObjDataTable/ProductMapObjDataTable.bcsv",
+					"RequiredFile": "SMG2"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ObjNameTable",
+					"DefaultArchivePath": "/SystemData/ObjNameTable.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/StageData/ObjNameTable.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/ObjNameTable/ObjNameTable.tbl"
+				},
+				{
+					"Type": "Menu",
+					"DefaultName": "NPCData",
+					"MenuElements": [
+						{
+							"Type": "Shortcut",
+							"DefaultName": "CaretakerItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/CaretakerItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "HoneyBeeItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/HoneyBeeItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "KinopioItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/KinopioItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "KinopioBankItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/KinopioBankItem.bcsv",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "PeachItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/PeachItem.bcsv",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "PenguinRacerItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/PenguinRacerItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "PenguinRacerLeaderItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/PenguinRacerLeaderItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoCometItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoCometItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoGalaxyItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoGalaxyItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoFatItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoFatItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoFatStarPieceItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoFatStarPieceItem.bcsv",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoFatCoinItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoFatCoinItem.bcsv",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoShopItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoShopItem.bcsv"
+						},
+						{
+							"Type": "Shortcut",
+							"DefaultName": "TicoShopDiceItem",
+							"DefaultArchivePath": "/ObjectData/NPCData.arc",
+							"DefaultBcsvPath": "/NPCData/TicoShopDiceItem.bcsv",
+							"RequiredFile": "SMG2"
+						}
+					]
+				},
+				{
+					"Type": "Separator"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ObjectInfluenceTable",
+					"DefaultArchivePath": "/ObjectData/MarioConst.arc",
+					"DefaultBcsvPath": "/MarioConst/ActorInfo/ObjectInfluenceTable.bcsv",
+					"RequiredFile": "SMG2"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "RushInfluenceTable",
+					"DefaultArchivePath": "/ObjectData/MarioConst.arc",
+					"DefaultBcsvPath": "/MarioConst/ActorInfo/RushInfluenceTable.bcsv",
+					"RequiredFile": "SMG2"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "MorphConditionTable",
+					"DefaultArchivePath": "/ObjectData/MarioConst.arc",
+					"DefaultBcsvPath": "/MarioConst/ActorInfo/MorphConditionTable.bcsv",
+					"RequiredFile": "SMG2"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "AstroNamePlateData",
+					"DefaultArchivePath": "/ObjectData/AstroNamePlateData.arc",
+					"DefaultBcsvPath": "/AstroNamePlateData/AstroNamePlateData.bcsv",
+					"RequiredFile": "SMG1"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "WorldMapCamera",
+					"DefaultArchivePath": "/ObjectData/WorldMapCamera.arc",
+					"DefaultBcsvPath": "/WorldMapCamera/ActorInfo/CameraParam.bcam",
+					"RequiredFile": "SMG2"
+				}
+			]
+		},
+		{
+			"DefaultName": "System",
+			"Type": "Menu",
+			"RequiredFile": "SMG2",
+			"MenuElements": [
+				{
+					"Type": "Shortcut",
+					"DefaultName": "HeapSizeExcept",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/HeapSizeExcept.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "MarioFaceShipEventDataTable",
+					"OtherNames": [
+						{
+							"Name": "HubworldEventDataTable",
+							"RequiredFile": "GLE"
+						}
+					],
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/MarioFaceShipEventDataTable.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/SystemDataTable/HubworldEventDataTable.bcsv",
+							"RequiredFile": "GLE"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "GalaxyDataTable",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/GalaxyDataTable.bcsv",
+					"RequiredFile": "!GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "GalaxyWorldOrderList",
+					"OtherNames": [
+						{
+							"Name": "GalaxyOrderList",
+							"RequiredFile": "GLE"
+						}
+					],
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/GalaxyWorldOrderList.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/SystemDataTable/GalaxyOrderList.bcsv",
+							"RequiredFile": "GLE"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "MarioFaceShipEventCastTable",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/MarioFaceShipEventCastTable.bcsv",
+					"RequiredFile": "!GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "WorldMapHeapGalaxy",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/WorldMapHeapGalaxy.bcsv",
+					"RequiredFile": "!GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "WorldMapHeapResource",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/WorldMapHeapResource.bcsv",
+					"RequiredFile": "!GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "GameEventValueTable",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/GameEventValueTable.bcsv",
+					"RequiredFile": "GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "GameSettings",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/GameSettings.bcsv",
+					"RequiredFile": "GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "HubworldStarReturnDataTable",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/HubworldStarReturnDataTable.bcsv",
+					"RequiredFile": "GLE"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "SavePointList",
+					"DefaultArchivePath": "/ObjectData/SystemDataTable.arc",
+					"DefaultBcsvPath": "/SystemDataTable/SavePointList.bcsv",
+					"RequiredFile": "GLE"
+				}
+			]
+		},
+		{
+			"DefaultName": "Audio",
+			"Type": "Menu",
+			"RequiredFile": "SMG2",
+			"MenuElements": [
+				{
+					"Type": "Shortcut",
+					"DefaultName": "StageBgmInfo",
+					"DefaultArchivePath": "/AudioRes/Info/StageBgmInfo.arc",
+					"DefaultBcsvPath": "/StageBgmInfo/StageBgmInfo.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ScenarioBgmInfo",
+					"DefaultArchivePath": "/AudioRes/Info/StageBgmInfo.arc",
+					"DefaultBcsvPath": "/StageBgmInfo/ScenarioBgmInfo.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "MultiBgmInfo",
+					"DefaultArchivePath": "/AudioRes/Info/MultiBgmInfo.arc",
+					"DefaultBcsvPath": "/MultiBgmInfo/MultiBgmInfo.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "BgmParam",
+					"DefaultArchivePath": "/AudioRes/Info/BgmParam.arc",
+					"DefaultBcsvPath": "/BgmParam/BgmParam.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ActionSound",
+					"DefaultArchivePath": "/AudioRes/Info/ActionSound.arc",
+					"DefaultBcsvPath": "/ActionSound/ActionSound.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "SoundIdToInstList",
+					"DefaultArchivePath": "/AudioRes/Info/SoundIdToInstList.arc",
+					"DefaultBcsvPath": "/SoundIdToInstList/SoundIdToInstList.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "TrackControl",
+					"DefaultArchivePath": "/AudioRes/Info/BgmParam.arc",
+					"DefaultBcsvPath": "/BgmParam/TrackControl.bcsv",
+					"RequiredFile": "GLE"
+				}
+			]
+		},
+		{
+			"DefaultName": "Effects",
+			"Type": "Menu",
+			"MenuElements": [
+				{
+					"Type": "Shortcut",
+					"DefaultName": "ParticleName",
+					"DefaultArchivePath": "/ParticleData/Effect.arc",
+					"DefaultBcsvPath": "/Effect/ParticleNames.bcsv"
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "AutoEffectList",
+					"DefaultArchivePath": "/ParticleData/Effect.arc",
+					"DefaultBcsvPath": "/Effect/AutoEffectList.bcsv"
+				}
+			]
+		},
+		{
+			"Type": "Menu",
+			"DefaultName": "Cutscenes",
+			"MenuElements": [
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Time",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/DemoSheet.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/csv/%sTime.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/demosheet/%s/%sTime.bcsv",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:",
+							"RequiredFile": "SMG2"
+						}, 
+						{
+							"VariableName": "ZoneName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						},
+						{
+							"VariableName": "DemoName",
+							"RequiredFile": "SMG1"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "SubPart",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/DemoSheet.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/csv/%sSubPart.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/demosheet/%s/%sSubPart.bcsv",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:",
+							"RequiredFile": "SMG2"
+						}, 
+						{
+							"VariableName": "ZoneName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						},
+						{
+							"VariableName": "DemoName",
+							"RequiredFile": "SMG1"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Action",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/DemoSheet.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/csv/%sAction.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/demosheet/%s/%sAction.bcsv",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:",
+							"RequiredFile": "SMG2"
+						}, 
+						{
+							"VariableName": "ZoneName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						},
+						{
+							"VariableName": "DemoName",
+							"RequiredFile": "SMG1"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Player",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/DemoSheet.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/csv/%sPlayer.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/demosheet/%s/%sPlayer.bcsv",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:",
+							"RequiredFile": "SMG2"
+						}, 
+						{
+							"VariableName": "ZoneName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						},
+						{
+							"VariableName": "DemoName",
+							"RequiredFile": "SMG1"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Camera",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"OtherArchivePaths": [
+						{
+							"ArchivePath": "/ObjectData/DemoSheet.arc",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"DefaultBcsvPath": "/Stage/csv/%sCamera.bcsv",
+					"OtherBcsvPaths": [
+						{
+							"BcsvPath": "/demosheet/%s/%sCamera.bcsv",
+							"RequiredFile": "SMG1"
+						}
+					],
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:",
+							"RequiredFile": "SMG2"
+						}, 
+						{
+							"VariableName": "ZoneName",
+							"RequiredFile": "SMG2"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						},
+						{
+							"VariableName": "DemoName",
+							"RequiredFile": "SMG1"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Sound",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"RequiredFile": "SMG2",
+					"DefaultBcsvPath": "/Stage/csv/%sSound.bcsv",
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:"
+						}, 
+						{
+							"VariableName": "ZoneName"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						}
+					]
+				},
+				{
+					"Type": "Shortcut",
+					"DefaultName": "Wipe",
+					"RequiredFile": "SMG2",
+					"DefaultArchivePath": "/StageData/%s/%sDemo.arc",
+					"DefaultBcsvPath": "/Stage/csv/%sWipe.bcsv",
+					"Variables": [
+						{
+							"VariableName": "ZoneName",
+							"VariableGetMessage": "Enter the zone's file name:"
+						}, 
+						{
+							"VariableName": "ZoneName"
+						},
+						{
+							"VariableName": "DemoName",
+							"VariableGetMessage": "Enter the demo sheet name:"
+						}
+					]
+				}
+				
+			]
+		}
+	]
+}
