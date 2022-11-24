@@ -483,11 +483,11 @@ public class BcsvEditorForm extends javax.swing.JFrame {
                 try {
                     switch(field.type) {
                         case 0:
-                        case 3: entry.put(field.hash, Integer.parseInt(val)); break;
+                        case 3: entry.put(field.hash, Integer.parseInt(val.replaceAll(",", ""))); break;
                         case 1:
                         case 6: entry.put(field.hash, val); break;
-                        case 2: entry.put(field.hash, Float.parseFloat(val)); break;
-                        case 4: entry.put(field.hash, Short.parseShort(val)); break;
+                        case 2: entry.put(field.hash, Float.parseFloat(val.replaceAll(",", ""))); break;
+                        case 4: entry.put(field.hash, Short.parseShort(val.replaceAll(",", ""))); break;
                         case 5: entry.put(field.hash, Byte.parseByte(val)); break;
                     }
                 }

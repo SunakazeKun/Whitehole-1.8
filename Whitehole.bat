@@ -1,1 +1,1 @@
-java --add-exports=java.desktop/sun.awt=ALL-UNNAMED -jar Whitehole.jar
+java --add-exports=java.desktop/sun.awt=ALL-UNNAMED -Dsun.java2d.uiScale=1.0 -jar Whitehole.jar
