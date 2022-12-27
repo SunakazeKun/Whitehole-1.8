@@ -443,6 +443,22 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------------------------------------------------------
     // Zone loading and saving
     
+    private void openSelectedZone() {
+        if (zoneEditors.containsKey(curZone)) {
+            if (!zoneEditors.get(curZone).isVisible()) {
+                zoneEditors.remove(curZone);
+            }
+            else {
+                zoneEditors.get(curZone).toFront();
+                return;
+            }
+        }
+        
+        GalaxyEditorForm form = new GalaxyEditorForm(this, curZoneArc);
+        form.setVisible(true);
+        zoneEditors.put(curZone, form);
+    }
+    
     private void loadZone(String zone) {
         // Load zone archive
         StageArchive arc;
@@ -744,6 +760,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         lblZones = new javax.swing.JLabel();
         btnAddZone = new javax.swing.JButton();
         btnDeleteZone = new javax.swing.JButton();
+        sepZones = new javax.swing.JToolBar.Separator();
         btnEditZone = new javax.swing.JButton();
         scrZones = new javax.swing.JScrollPane();
         listZones = new javax.swing.JList();
@@ -958,7 +975,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         tlbZones.setFloatable(false);
         tlbZones.setRollover(true);
 
-        lblZones.setText("Zones:");
+        lblZones.setText(" Zones: ");
         tlbZones.add(lblZones);
 
         btnAddZone.setText("Add");
@@ -982,6 +999,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
             }
         });
         tlbZones.add(btnDeleteZone);
+        tlbZones.add(sepZones);
 
         btnEditZone.setText("Edit individually");
         btnEditZone.setFocusable(false);
@@ -998,6 +1016,11 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
 
         listZones.setModel(new DefaultListModel());
         listZones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listZones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listZonesMouseClicked(evt);
+            }
+        });
         listZones.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listZonesValueChanged(evt);
@@ -1435,19 +1458,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteZoneActionPerformed
 
     private void btnEditZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditZoneActionPerformed
-        if (zoneEditors.containsKey(curZone)) {
-            if (!zoneEditors.get(curZone).isVisible()) {
-                zoneEditors.remove(curZone);
-            }
-            else {
-                zoneEditors.get(curZone).toFront();
-                return;
-            }
-        }
-        
-        GalaxyEditorForm form = new GalaxyEditorForm(this, curZoneArc);
-        form.setVisible(true);
-        zoneEditors.put(curZone, form);
+        openSelectedZone();
     }//GEN-LAST:event_btnEditZoneActionPerformed
 
     private void tgbDeselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbDeselectActionPerformed
@@ -1580,6 +1591,11 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
             glCanvas.repaint();
         }
     }//GEN-LAST:event_tgbPasteObjActionPerformed
+
+    private void listZonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listZonesMouseClicked
+        if (evt.getClickCount() > 1 && btnEditZone.isEnabled())
+            openSelectedZone();
+    }//GEN-LAST:event_listZonesMouseClicked
     
     // -------------------------------------------------------------------------------------------------------------------------
     // Object adding and deleting
@@ -4076,6 +4092,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator sep3;
     private javax.swing.JToolBar.Separator sep4;
     private javax.swing.JToolBar.Separator sep5;
+    private javax.swing.JToolBar.Separator sepZones;
     private javax.swing.JSplitPane split;
     private javax.swing.JTabbedPane tabData;
     private javax.swing.JToggleButton tgbAddObject;
