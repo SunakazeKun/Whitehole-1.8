@@ -141,7 +141,7 @@ public abstract class AbstractObj {
             case "SW_SLEEP":
             case "SW_AWAKE":
             case "SW_PARAM":
-                panel.addField(field, field, "int", null, data.getInt(field, -1), "Default");
+                panel.addField(field, field, "switchid", null, data.getInt(field, -1), "Default");
                 break;
                 
             // Linked Objects
