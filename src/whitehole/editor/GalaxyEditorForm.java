@@ -175,6 +175,8 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
                 loadZone(zone);
             }
             
+            checkForInvalidSwitchesInGalaxy();
+            
             // Collect zone placements
             StageArchive galaxyZone = zoneArchives.get(galaxyName);
             
@@ -500,6 +502,81 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         }
     }
     
+    private void checkForInvalidSwitchesInGalaxy() {
+        Map<String, Set<Integer>> invalidSwitchZoneMap = new HashMap<>();
+        Set<Integer> invalidSwitchList = new HashSet<>();
+        String[] switchFieldList = {"SW_APPEAR", "SW_DEAD", "SW_A", "SW_B", "SW_AWAKE", "SW_PARAM", "SW_SLEEP"};
+        
+        // Generate a list and map of invalid switch IDs
+        for (StageArchive arc : zoneArchives.values()) {
+            // Add zone to map
+            invalidSwitchZoneMap.put(arc.stageName, new HashSet<>());
+            
+            // Go through each object's switch fields
+            for (List<AbstractObj> layers : arc.objects.values()) {
+                for (AbstractObj obj : layers) {
+                    for (String field : switchFieldList) {
+                        int switchId = obj.data.getInt(field, -1);
+                        
+                        // Only valid Switch IDs: -1 (No Switch); 0-127 (Zone Exclusive); 1000-1127 (Galaxy Exclusive)
+                        if (switchId !=-1 && !(switchId >= 0 && switchId <=127) && !(switchId >=1000 && switchId < 1127)) {
+                            invalidSwitchZoneMap.get(arc.stageName).add(switchId);
+                            invalidSwitchList.add(switchId);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Go through each invalid switch and replace it
+        for (int invalidSwitch : invalidSwitchList) {
+            ArrayList<String> switchZoneAppearances = new ArrayList<>();
+            String additionalInfo = "";
+
+            // Generate a list of zones the switch appears in
+            for (String zone : invalidSwitchZoneMap.keySet()) {
+                if (invalidSwitchZoneMap.get(zone).contains(invalidSwitch))
+                    switchZoneAppearances.add(zone);
+            }
+
+            // If the switch ID is used across multiple zones, inform the user
+            if (switchZoneAppearances.size() >= 2)
+                additionalInfo = "\n(!) This switch ID is used across multiple zones.";
+            
+            // Generate the UI
+            String[] choices = {"Zone", "Galaxy", "Don't replace"};
+            int choice = JOptionPane.showOptionDialog(null, "An invalid switch ID was found: "+invalidSwitch+additionalInfo+
+                "\nGenerate new switch for:", "Invalid Switch ID found!",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, choices, null);
+            
+            if (choice==-1)
+                choice = 2;
+            
+            // Generate and replace the switch based on their choice
+            int replSwitchID;
+            switch (choices[choice]) {
+            case "Zone":
+                for (String zoneString : switchZoneAppearances) {
+                    replSwitchID = getValidSwitchInZone(zoneArchives.get(zoneString)); // Generate
+                    
+                    if (replSwitchID !=-1)
+                        zoneArchives = replaceSwitchID(invalidSwitch, replSwitchID, zoneArchives, zoneString); // Replace
+                }
+                unsavedChanges = true;
+                break;
+
+            case "Galaxy":
+                replSwitchID = getValidSwitchInGalaxy(zoneArchives); // Generate
+                
+                if (replSwitchID !=-1)
+                    zoneArchives = replaceSwitchID(invalidSwitch, replSwitchID, zoneArchives); // Replace
+                unsavedChanges = true;
+                break;
+            }
+        }
+    }
+
     private void saveChanges() {
         lblStatus.setText("Saving changes...");
         
@@ -4266,5 +4343,29 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         
         return set;
     }
+     
+    private HashMap<String, StageArchive> replaceSwitchID(int switchIdToReplace, int switchIdToReplaceWith, HashMap<String, StageArchive> zoneArcs) {
+        return replaceSwitchID(switchIdToReplace, switchIdToReplaceWith, zoneArcs, "");
+    }
     
+    private HashMap<String, StageArchive> replaceSwitchID(int switchIdToReplace, int switchIdToReplaceWith, HashMap<String, StageArchive> zoneArcs, String zoneName) {
+        String[] switchFieldList = {"SW_APPEAR", "SW_DEAD", "SW_A", "SW_B", "SW_AWAKE", "SW_PARAM", "SW_SLEEP"};
+        
+        for (StageArchive zoneArc : zoneArcs.values()) {
+            if (zoneName.equals(zoneArc.stageName) || zoneName.isBlank()) { // for zone specific replacements
+                for (List<AbstractObj> layers : zoneArc.objects.values()) {
+                    for (AbstractObj obj : layers) {
+                        for (String field : switchFieldList) {
+                            int switchId = obj.data.getInt(field, -1);
+
+                            if (switchId == switchIdToReplace)
+                                obj.data.put(field, switchIdToReplaceWith);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return zoneArcs;
+    }
 }
