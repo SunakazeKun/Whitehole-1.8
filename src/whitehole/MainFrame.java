@@ -69,9 +69,15 @@ public final class MainFrame extends javax.swing.JFrame {
         btnOpenGalaxy.setEnabled(false);
         btnBcsvEditor.setEnabled(false);
         
-        // Reload object database if previous selected game overwrite its data
-        if (Whitehole.GAME != null && Whitehole.GAME.hasOverwrittenDB()) {
-            ObjectDB.init(false);
+        // Reload databases if previous selected game overwrote them
+        if (Whitehole.GAME != null) {
+            if (Whitehole.GAME.hasOverwriteObjectDatabase()) {
+                ObjectDB.init(false);
+            }
+            
+            if (Whitehole.GAME.hasOverwriteGalaxyNames()) {
+                GalaxyNames.clearProjectDatabase();
+            }
         }
         
         // Load game system and store last selected game directory

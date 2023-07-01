@@ -7,6 +7,5 @@
 		<copy file="data/hashlookup.txt" todir="${dist.dir}/data"/>
 		<copy file="data/galaxies.json" todir="${dist.dir}/data"/>
 		<copy file="data/modelsubstitutions.json" todir="${dist.dir}/data"/>
-		<copy file="data/objectdb.json" todir="${dist.dir}/data"/>
 	</target>
 </project>

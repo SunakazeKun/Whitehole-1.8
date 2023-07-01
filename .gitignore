@@ -1,4 +1,4 @@
 /build
 /dist
 /nbproject/private/
-*.ini
+data/objectdb.json

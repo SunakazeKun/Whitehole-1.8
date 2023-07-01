@@ -21,15 +21,18 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import whitehole.io.ExternalFilesystem;
 
 public final class GalaxyNames {
     private GalaxyNames() {}
     
-    private static JSONObject SIMPLIFIED_STAGE_NAMES;
+    private static JSONObject originalStageNames;
+    private static JSONObject projectStageNames;
     
     public static void init() {
         try(FileReader reader = new FileReader("data/galaxies.json", StandardCharsets.UTF_8)) {
-            SIMPLIFIED_STAGE_NAMES = new JSONObject(new JSONTokener(reader));
+            originalStageNames = new JSONObject(new JSONTokener(reader));
+            projectStageNames = null;
         }
         catch (IOException ex) {
             System.out.println("FATAL! Could not load galaxies.json");
@@ -38,7 +41,31 @@ public final class GalaxyNames {
         }
     }
     
+    public static boolean tryOverwriteWithProjectDatabase(ExternalFilesystem filesystem) {
+        if (filesystem.fileExists("/galaxies.json")) {
+            JSONObject overwrite;
+            
+            try (FileReader reader = new FileReader(filesystem.getFileName("/galaxies.json"))) {
+                overwrite = new JSONObject(new JSONTokener(reader));
+            }
+            catch(IOException ex) {
+                System.err.println(ex);
+                return false;
+            }
+            
+            projectStageNames = overwrite;
+            return true;
+        }
+        
+        return false;
+    }
+    
+    public static void clearProjectDatabase() {
+        projectStageNames = null;
+    }
+    
     public static String getSimplifiedStageName(String stage) {
-        return SIMPLIFIED_STAGE_NAMES.optString(stage, String.format("\"%s\"", stage));
+        JSONObject dbSrc = projectStageNames != null ? projectStageNames : originalStageNames;
+        return dbSrc.optString(stage, String.format("\"%s\"", stage));
     }
 }

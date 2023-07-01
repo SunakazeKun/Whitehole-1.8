@@ -20,6 +20,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import whitehole.db.FieldHashes;
+import whitehole.db.GalaxyNames;
 import whitehole.db.ObjectDB;
 import whitehole.io.ExternalFilesystem;
 import whitehole.io.FilesystemBase;
@@ -34,7 +35,8 @@ public class GameArchive {
     private List<String> galaxies = new ArrayList(64);
     private List<String> planets = new ArrayList(256);
     private int gameType = 0;
-    private boolean hasOverwrittenDB;
+    private boolean hasOverwriteObjectDatabase;
+    private boolean hasOverwriteGalaxyNames;
     private boolean hasGLE = false;
     
     public GameArchive(FilesystemBase fs) {
@@ -82,9 +84,10 @@ public class GameArchive {
             System.err.println(ex);
         }
         
-        // Try to load project's objectdb
+        // Try to load project's overwrite databases
         if (filesystem instanceof ExternalFilesystem) {
-            hasOverwrittenDB = ObjectDB.tryOverwriteWithProjectDatabase((ExternalFilesystem)filesystem);
+            hasOverwriteObjectDatabase = ObjectDB.tryOverwriteWithProjectDatabase((ExternalFilesystem)filesystem);
+            hasOverwriteGalaxyNames = GalaxyNames.tryOverwriteWithProjectDatabase((ExternalFilesystem)filesystem);
         }
     }
     
@@ -149,7 +152,11 @@ public class GameArchive {
         return null;
     }
     
-    public boolean hasOverwrittenDB() {
-        return hasOverwrittenDB;
+    public boolean hasOverwriteObjectDatabase() {
+        return hasOverwriteObjectDatabase;
+    }
+    
+    public boolean hasOverwriteGalaxyNames() {
+        return hasOverwriteGalaxyNames;
     }
 }

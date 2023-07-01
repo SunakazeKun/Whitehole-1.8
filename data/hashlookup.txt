@@ -1,28 +1,14 @@
 ### Unknown hashes
-# 33922D02	ActionSound.bcsv
-# 60CB6B62	SoundIdToInstList.bcsv
 # 528AC841	InitSensor.bcsv
 # 4DB4F9C4	InitSensor.bcsv
-# 045C8ED4	ObjectData/PostFog/GradTypeString.bcsv
 # 43EA1591	HeapSizeExcept.bcsv
 # 4D6DBDAE	ObjectData/WorldMap01/SpaceParts.bcsv
 # 433A5DB7	ObjectData/WorldMap01/SpaceParts.bcsv
 # 912C1F84	ObjectData/WorldMap01/SpaceParts.bcsv
-# 90E56480	ObjectData/WorldMap08/Galaxy.bcsv
-# C6672A7E	ObjectData/Yoshi/ActorInfo/BackToEgg.bcsv
-# 6D52E4A8	ObjectData/Yoshi/ActorInfo/BackToEgg.bcsv
 # 02BA7D47	ObjectData/Yoshi/ActorInfo/BackToEgg.bcsv
-# 55CFC442	Stage/jmp/Placement/Common/ChangeObjInfo
-# C4F73392	Stage/jmp/Placement/Common/ChangeObjInfo
-# 9BA65420	fileselectscenario/scenariodata.bcsv
-# 9BA5D1A0	fileselectscenario/scenariodata.bcsv
-# BDE1379B	Battan/ActorInfo/ActionFlagCtrl.bcsv
-# 4B53CFCB	Battan/ActorInfo/ActionFlagCtrl.bcsv
-# 4B53CEDD	Battan/ActorInfo/ActionFlagCtrl.bcsv
 # DCE271F4	BigSignBoard/ActorInfo/ActionFlagCtrl.bcsv
 # 9AA5EF52	BigSignBoard/ActorInfo/ActionFlagCtrl.bcsv
 # 9AA5EE64	BigSignBoard/ActorInfo/ActionFlagCtrl.bcsv
-# 1439D35C	StageSelectMenu.tbl layers?
 # 6DC3A6D2	StageSelectMenu.tbl
 ### General names
 AccelRateToBckPos
@@ -40,7 +26,9 @@ AppearPowerStarObj
 ArciveName
 AreaLightName
 AreaShapeNo
+BackTimer
 BankProgNo
+BankProgNoName
 BckIsKeepAnim
 BckName
 BckName1st
@@ -136,6 +124,8 @@ CloseGameFlag
 CloseStageName
 CloseStageScenarioNo
 Cloud
+Coin100
+CoinRed
 Collision
 CollisionName
 CollisionParts
@@ -290,10 +280,13 @@ ItemInfoName
 Joint
 JointName
 JumpRush
+Label
 LandEffect
+LayerName
 LayerNo
 LevelNum
 Life
+LifeMax
 LightAffectValue
 LightID
 LineEnd
@@ -346,11 +339,13 @@ Obj_arg4
 Obj_arg5
 Obj_arg6
 Obj_arg7
+OffObj_ID
 OffsetX
 OffsetY
 OffsetY0
 OffsetY1
 OffsetZ
+OnObj_ID
 OpenCondition0
 OpenCondition1
 OpenCondition2
@@ -519,6 +514,7 @@ ShowModel
 SideOffset
 SideSize
 SignMotionType
+SingleSoundId
 SizeUpRate
 SizeX
 SizeY
@@ -643,6 +639,7 @@ WeakLight1PosZ
 WipeFrame
 WipeName
 WipeType
+WorldIndex
 WorldNo
 Yoshi
 ZoneName
@@ -1397,11 +1394,11 @@ SensorPush
 SensorPushStepMax
 SensorPushStepMin
 SensorSearch
-SensorSearchStepMax
-SensorSearchStepMin
 SensorSearchArea
 SensorSearchAreaStepMax
 SensorSearchAreaStepMin
+SensorSearchStepMax
+SensorSearchStepMin
 SensorShell
 SensorShell2
 SensorShell2StepMax
@@ -1442,6 +1439,9 @@ SensorStampRight
 SensorStampRightStepMax
 SensorStampRightStepMin
 SensorTurn
+SensorTurn2
+SensorTurn2StepMax
+SensorTurn2StepMin
 SensorTurnStepMax
 SensorTurnStepMin
 SensorWeakPointBack
