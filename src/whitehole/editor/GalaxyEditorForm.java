@@ -2202,22 +2202,20 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         String stageKey = String.format("%d/%s", curScenarioID, curZone);
         if(zonePlacements.containsKey(stageKey)) {
             StageObj szdata = zonePlacements.get(stageKey);
-            
-            float rotY = szdata.rotation.y;
-            
-            float xcos =(float) Math.cos(-((int)szdata.rotation.z * Math.PI) / 180f);
-            float xsin =(float) Math.sin(-((int)szdata.rotation.z * Math.PI) / 180f);
-            float ycos =(float) Math.cos(-((int)rotY * Math.PI) / 180f);
-            float ysin =(float) Math.sin(-((int)rotY * Math.PI) / 180f);
-            float zcos =(float) Math.cos(-((int)szdata.rotation.x * Math.PI) / 180f);
-            float zsin =(float) Math.sin(-((int)szdata.rotation.x * Math.PI) / 180f);
 
-            float x1 =(delta.x * zcos) -(delta.y * zsin);
-            float y1 =(delta.x * zsin) +(delta.y * zcos);
-            float x2 =(x1 * ycos) +(delta.z * ysin);
-            float z2 = -(x1 * ysin) +(delta.z * ycos);
-            float y3 =(y1 * xcos) -(z2 * xsin);
-            float z3 =(y1 * xsin) +(z2 * xcos);
+            float xcos = (float)Math.cos(-(szdata.rotation.x * Math.PI) / 180f);
+            float xsin = (float)Math.sin(-(szdata.rotation.x * Math.PI) / 180f);
+            float ycos = (float)Math.cos(-(szdata.rotation.y * Math.PI) / 180f);
+            float ysin = (float)Math.sin(-(szdata.rotation.y * Math.PI) / 180f);
+            float zcos = (float)Math.cos(-(szdata.rotation.z * Math.PI) / 180f);
+            float zsin = (float)Math.sin(-(szdata.rotation.z * Math.PI) / 180f);
+
+            float x1 = (delta.x * zcos) - (delta.y * zsin);
+            float y1 = (delta.x * zsin) + (delta.y * zcos);
+            float x2 = (x1 * ycos) + (delta.z * ysin);
+            float z2 = -(x1 * ysin) + (delta.z * ycos);
+            float y3 = (y1 * xcos) - (z2 * xsin);
+            float z3 = (y1 * xsin) + (z2 * xcos);
 
             delta.x = x2;
             delta.y = y3;

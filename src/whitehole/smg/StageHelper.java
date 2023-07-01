@@ -465,13 +465,14 @@ public class StageHelper {
         bcsv.addField("CastId", 0, -1, 0, -1);
         bcsv.addField("ViewGroupId", 0, -1, 0, -1);
         bcsv.addField("MessageId", 0, -1, 0, -1);
-        bcsv.addField("ParentID", 4, -1, 0, (short)-1);
-        bcsv.addField("ShapeModelNo", 4, -1, 0, (short)-1);
-        bcsv.addField("CommonPath_ID", 4, -1, 0, (short)-1);
-        bcsv.addField("ClippingGroupId", 4, -1, 0, (short)-1);
-        bcsv.addField("GroupId", 4, -1, 0, (short)-1);
-        bcsv.addField("DemoGroupId", 4, -1, 0, (short)-1);
-        bcsv.addField("MapParts_ID", 4, -1, 0, (short)-1);
+        
+        bcsv.addField("ParentID", 4, 0xFFFF, 0, (short)-1);
+        bcsv.addField("ShapeModelNo", 4, 0xFFFF, 0, (short)-1);
+        bcsv.addField("CommonPath_ID", 4, 0xFFFF, 0, (short)-1);
+        bcsv.addField("ClippingGroupId", 4, 0xFFFF, 0, (short)-1);
+        bcsv.addField("GroupId", 4, 0xFFFF, 0, (short)-1);
+        bcsv.addField("DemoGroupId", 4, 0xFFFF, 0, (short)-1);
+        bcsv.addField("MapParts_ID", 4, 0xFFFF, 0, (short)-1);
     }
     
     private static void populateJMapFieldsSoundInfo(Bcsv bcsv) {
