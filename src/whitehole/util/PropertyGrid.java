@@ -712,15 +712,22 @@ public class PropertyGrid extends JTable {
                 @Override
                 public void keyReleased(KeyEvent evt) {
                     Object val = textfield.getText();
+                    boolean isValidSwitchID = true;
                     try {
-                        val = Integer.parseInt((String)val);
-                        textfield.setForeground(Color.getColor("text"));
-                        field.value = val;
-                        eventListener.propertyChanged(field.name, val);
+                        int switchID = Integer.parseInt((String)val);
+                        val = switchID;
+                        if ((switchID > -1 && switchID < 128) || (switchID > 999 && switchID < 1128)) {
+                            textfield.setForeground(Color.getColor("text"));
+                            field.value = val;
+                            eventListener.propertyChanged(field.name, val);
+                        } else
+                            isValidSwitchID = false;
                     }
                     catch (NumberFormatException ex) {
-                        textfield.setForeground(new Color(0xFF4040));
+                        isValidSwitchID = false;
                     }
+                    if (!isValidSwitchID)
+                        textfield.setForeground(new Color(0xFF4040));
                 }
             });
             textfield.requestFocusInWindow();
