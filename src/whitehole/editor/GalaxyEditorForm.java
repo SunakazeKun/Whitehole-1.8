@@ -519,7 +519,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
                         int switchId = obj.data.getInt(field, -1);
                         
                         // Only valid Switch IDs: -1 (No Switch); 0-127 (Zone Exclusive); 1000-1127 (Galaxy Exclusive)
-                        if (switchId !=-1 && !(switchId >= 0 && switchId <=127) && !(switchId >=1000 && switchId < 1127)) {
+                        if (switchId !=-1 && !(switchId >= 0 && switchId <=127) && !(switchId >=1000 && switchId <= 1127)) {
                             invalidSwitchZoneMap.get(arc.stageName).add(switchId);
                             invalidSwitchList.add(switchId);
                         }

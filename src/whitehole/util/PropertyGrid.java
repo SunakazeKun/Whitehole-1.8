@@ -716,7 +716,7 @@ public class PropertyGrid extends JTable {
                     try {
                         int switchID = Integer.parseInt((String)val);
                         val = switchID;
-                        if ((switchID > -1 && switchID < 128) || (switchID > 999 && switchID < 1128)) {
+                        if ((switchID > -2 && switchID < 128) || (switchID > 999 && switchID < 1128)) {
                             textfield.setForeground(Color.getColor("text"));
                             field.value = val;
                             eventListener.propertyChanged(field.name, val);
