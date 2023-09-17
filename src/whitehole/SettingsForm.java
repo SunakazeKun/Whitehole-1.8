@@ -57,6 +57,7 @@ public class SettingsForm extends javax.swing.JDialog {
         btnPosition = new KeybindButton();
         btnRotation = new KeybindButton();
         btnScale = new KeybindButton();
+        chkUseGalaxyFileNames = new javax.swing.JCheckBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle(String.format("%s -- Settings", Whitehole.NAME));
@@ -196,6 +197,24 @@ public class SettingsForm extends javax.swing.JDialog {
         gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
         pnlSettings.add(btnScale, gridBagConstraints);
 
+        chkUseGalaxyFileNames.setSelected(Settings.getUseGalaxyFileNames());
+        chkUseGalaxyFileNames.setText("Use Galaxy File Names");
+        chkUseGalaxyFileNames.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                chkUseGalaxyFileNamesItemStateChanged(evt);
+            }
+        });
+        chkUseGalaxyFileNames.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                chkUseGalaxyFileNamesActionPerformed(evt);
+            }
+        });
+        gridBagConstraints = new java.awt.GridBagConstraints();
+        gridBagConstraints.gridx = 0;
+        gridBagConstraints.fill = java.awt.GridBagConstraints.BOTH;
+        gridBagConstraints.insets = new java.awt.Insets(2, 2, 2, 2);
+        pnlSettings.add(chkUseGalaxyFileNames, gridBagConstraints);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -243,6 +262,15 @@ public class SettingsForm extends javax.swing.JDialog {
         Settings.setUseDarkMode(evt.getStateChange() == ItemEvent.SELECTED);
         Whitehole.requestUpdateLAF();
     }//GEN-LAST:event_chkUseDarkModeItemStateChanged
+
+    private void chkUseGalaxyFileNamesItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_chkUseGalaxyFileNamesItemStateChanged
+        Settings.setUseGalaxyFileNames(evt.getStateChange() == ItemEvent.SELECTED);
+        Whitehole.updateGalaxyList();
+    }//GEN-LAST:event_chkUseGalaxyFileNamesItemStateChanged
+
+    private void chkUseGalaxyFileNamesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_chkUseGalaxyFileNamesActionPerformed
+        
+    }//GEN-LAST:event_chkUseGalaxyFileNamesActionPerformed
     
     private static class KeybindButton extends JButton {
         boolean binding = false;
@@ -293,6 +321,7 @@ public class SettingsForm extends javax.swing.JDialog {
     private javax.swing.JCheckBox chkDebugFakeColor;
     private javax.swing.JCheckBox chkDebugFastDrag;
     private javax.swing.JCheckBox chkUseDarkMode;
+    private javax.swing.JCheckBox chkUseGalaxyFileNames;
     private javax.swing.JCheckBox chkUseReverseRot;
     private javax.swing.JCheckBox chkUseWASD;
     private javax.swing.JLabel lblAppearance;

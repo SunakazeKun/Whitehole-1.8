@@ -74,6 +74,10 @@ public class Whitehole {
         MAIN_FRAME.setVisible(true);
     }
     
+    public static void updateGalaxyList() {
+        MAIN_FRAME.openGameDir(Settings.getLastGameDir());
+    }
+    
     public static void requestUpdateLAF() {
         LookAndFeel next = null;
         

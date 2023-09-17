@@ -21,6 +21,7 @@ import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 import org.json.JSONObject;
 import org.json.JSONTokener;
+import whitehole.Settings;
 import whitehole.io.ExternalFilesystem;
 
 public final class GalaxyNames {
@@ -66,6 +67,6 @@ public final class GalaxyNames {
     
     public static String getSimplifiedStageName(String stage) {
         JSONObject dbSrc = projectStageNames != null ? projectStageNames : originalStageNames;
-        return dbSrc.optString(stage, String.format("\"%s\"", stage));
+        return Settings.getUseGalaxyFileNames() ? dbSrc.optString(stage, String.format("\"%s\"", stage)) : stage;
     }
 }

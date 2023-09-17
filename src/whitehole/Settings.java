@@ -28,10 +28,12 @@ public final class Settings {
     public static String getLastGameDir() { return PREFERENCES.get("whitehole_lastGameDir", null); }
     public static boolean getSJISNotSupported() { return PREFERENCES.getBoolean("whitehole_sjisNotSupported", false); }
     public static boolean getUseDarkMode() { return PREFERENCES.getBoolean("whitehole_useDarkMode", true); }
+    public static boolean getUseGalaxyFileNames() { return PREFERENCES.getBoolean("whitehole_useGalaxyFileNames", true);}
     
     public static void setLastGameDir(String val) { PREFERENCES.put("whitehole_lastGameDir", val); }
     public static void setSJISNotSupported(boolean val) { PREFERENCES.putBoolean("whitehole_sjisNotSupported", val); }
     public static void setUseDarkMode(boolean val) { PREFERENCES.putBoolean("whitehole_useDarkMode", val); }
+    public static void setUseGalaxyFileNames(boolean val) { PREFERENCES.putBoolean("whitehole_useGalaxyFileNames", val); }
     
     // Rendering
     public static boolean getShowAxis() { return PREFERENCES.getBoolean("whitehole_showAxis", true); }
