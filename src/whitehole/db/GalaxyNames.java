@@ -67,6 +67,6 @@ public final class GalaxyNames {
     
     public static String getSimplifiedStageName(String stage) {
         JSONObject dbSrc = projectStageNames != null ? projectStageNames : originalStageNames;
-        return Settings.getUseGalaxyFileNames() ? dbSrc.optString(stage, String.format("\"%s\"", stage)) : stage;
+        return !Settings.getUseGalaxyFileNames() ? dbSrc.optString(stage, String.format("\"%s\"", stage)) : stage;
     }
 }
