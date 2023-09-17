@@ -65,7 +65,7 @@ public final class MainFrame extends javax.swing.JFrame {
         settingsDialog = new SettingsForm(this);
     }
     
-    private void openGameDir(String gameDir) {
+    public void openGameDir(String gameDir) {
         btnOpenGalaxy.setEnabled(false);
         btnBcsvEditor.setEnabled(false);
         
