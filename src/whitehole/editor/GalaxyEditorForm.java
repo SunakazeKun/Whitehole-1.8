@@ -175,6 +175,8 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
                 loadZone(zone);
             }
             
+            checkForInvalidSwitchesInGalaxy();
+            
             // Collect zone placements
             StageArchive galaxyZone = zoneArchives.get(galaxyName);
             
@@ -443,6 +445,22 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
     // -------------------------------------------------------------------------------------------------------------------------
     // Zone loading and saving
     
+    private void openSelectedZone() {
+        if (zoneEditors.containsKey(curZone)) {
+            if (!zoneEditors.get(curZone).isVisible()) {
+                zoneEditors.remove(curZone);
+            }
+            else {
+                zoneEditors.get(curZone).toFront();
+                return;
+            }
+        }
+        
+        GalaxyEditorForm form = new GalaxyEditorForm(this, curZoneArc);
+        form.setVisible(true);
+        zoneEditors.put(curZone, form);
+    }
+    
     private void loadZone(String zone) {
         // Load zone archive
         StageArchive arc;
@@ -484,6 +502,81 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         }
     }
     
+    private void checkForInvalidSwitchesInGalaxy() {
+        Map<String, Set<Integer>> invalidSwitchZoneMap = new HashMap<>();
+        Set<Integer> invalidSwitchList = new HashSet<>();
+        String[] switchFieldList = {"SW_APPEAR", "SW_DEAD", "SW_A", "SW_B", "SW_AWAKE", "SW_PARAM", "SW_SLEEP"};
+        
+        // Generate a list and map of invalid switch IDs
+        for (StageArchive arc : zoneArchives.values()) {
+            // Add zone to map
+            invalidSwitchZoneMap.put(arc.stageName, new HashSet<>());
+            
+            // Go through each object's switch fields
+            for (List<AbstractObj> layers : arc.objects.values()) {
+                for (AbstractObj obj : layers) {
+                    for (String field : switchFieldList) {
+                        int switchId = obj.data.getInt(field, -1);
+                        
+                        // Only valid Switch IDs: -1 (No Switch); 0-127 (Zone Exclusive); 1000-1127 (Galaxy Exclusive)
+                        if (switchId !=-1 && !(switchId >= 0 && switchId <=127) && !(switchId >=1000 && switchId <= 1127)) {
+                            invalidSwitchZoneMap.get(arc.stageName).add(switchId);
+                            invalidSwitchList.add(switchId);
+                        }
+                    }
+                }
+            }
+        }
+        
+        // Go through each invalid switch and replace it
+        for (int invalidSwitch : invalidSwitchList) {
+            ArrayList<String> switchZoneAppearances = new ArrayList<>();
+            String additionalInfo = "";
+
+            // Generate a list of zones the switch appears in
+            for (String zone : invalidSwitchZoneMap.keySet()) {
+                if (invalidSwitchZoneMap.get(zone).contains(invalidSwitch))
+                    switchZoneAppearances.add(zone);
+            }
+
+            // If the switch ID is used across multiple zones, inform the user
+            if (switchZoneAppearances.size() >= 2)
+                additionalInfo = "\n(!) This switch ID is used across multiple zones.";
+            
+            // Generate the UI
+            String[] choices = {"Zone", "Galaxy", "Don't replace"};
+            int choice = JOptionPane.showOptionDialog(null, "An invalid switch ID was found: "+invalidSwitch+additionalInfo+
+                "\nGenerate new switch for:", "Invalid Switch ID found!",
+                JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE,
+                null, choices, null);
+            
+            if (choice==-1)
+                choice = 2;
+            
+            // Generate and replace the switch based on their choice
+            int replSwitchID;
+            switch (choices[choice]) {
+            case "Zone":
+                for (String zoneString : switchZoneAppearances) {
+                    replSwitchID = getValidSwitchInZone(zoneArchives.get(zoneString)); // Generate
+                    
+                    if (replSwitchID !=-1)
+                        zoneArchives = replaceSwitchID(invalidSwitch, replSwitchID, zoneArchives, zoneString); // Replace
+                }
+                unsavedChanges = true;
+                break;
+
+            case "Galaxy":
+                replSwitchID = getValidSwitchInGalaxy(zoneArchives); // Generate
+                
+                if (replSwitchID !=-1)
+                    zoneArchives = replaceSwitchID(invalidSwitch, replSwitchID, zoneArchives); // Replace
+                unsavedChanges = true;
+                break;
+            }
+        }
+    }
+
     private void saveChanges() {
         lblStatus.setText("Saving changes...");
         
@@ -744,6 +837,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         lblZones = new javax.swing.JLabel();
         btnAddZone = new javax.swing.JButton();
         btnDeleteZone = new javax.swing.JButton();
+        sepZones = new javax.swing.JToolBar.Separator();
         btnEditZone = new javax.swing.JButton();
         scrZones = new javax.swing.JScrollPane();
         listZones = new javax.swing.JList();
@@ -958,7 +1052,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         tlbZones.setFloatable(false);
         tlbZones.setRollover(true);
 
-        lblZones.setText("Zones:");
+        lblZones.setText(" Zones: ");
         tlbZones.add(lblZones);
 
         btnAddZone.setText("Add");
@@ -982,6 +1076,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
             }
         });
         tlbZones.add(btnDeleteZone);
+        tlbZones.add(sepZones);
 
         btnEditZone.setText("Edit individually");
         btnEditZone.setFocusable(false);
@@ -998,6 +1093,11 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
 
         listZones.setModel(new DefaultListModel());
         listZones.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        listZones.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                listZonesMouseClicked(evt);
+            }
+        });
         listZones.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 listZonesValueChanged(evt);
@@ -1435,19 +1535,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDeleteZoneActionPerformed
 
     private void btnEditZoneActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditZoneActionPerformed
-        if (zoneEditors.containsKey(curZone)) {
-            if (!zoneEditors.get(curZone).isVisible()) {
-                zoneEditors.remove(curZone);
-            }
-            else {
-                zoneEditors.get(curZone).toFront();
-                return;
-            }
-        }
-        
-        GalaxyEditorForm form = new GalaxyEditorForm(this, curZoneArc);
-        form.setVisible(true);
-        zoneEditors.put(curZone, form);
+        openSelectedZone();
     }//GEN-LAST:event_btnEditZoneActionPerformed
 
     private void tgbDeselectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tgbDeselectActionPerformed
@@ -1580,6 +1668,11 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
             glCanvas.repaint();
         }
     }//GEN-LAST:event_tgbPasteObjActionPerformed
+
+    private void listZonesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_listZonesMouseClicked
+        if (evt.getClickCount() > 1 && btnEditZone.isEnabled())
+            openSelectedZone();
+    }//GEN-LAST:event_listZonesMouseClicked
     
     // -------------------------------------------------------------------------------------------------------------------------
     // Object adding and deleting
@@ -4074,6 +4167,7 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
     private javax.swing.JToolBar.Separator sep3;
     private javax.swing.JToolBar.Separator sep4;
     private javax.swing.JToolBar.Separator sep5;
+    private javax.swing.JToolBar.Separator sepZones;
     private javax.swing.JSplitPane split;
     private javax.swing.JTabbedPane tabData;
     private javax.swing.JToggleButton tgbAddObject;
@@ -4144,5 +4238,132 @@ public class GalaxyEditorForm extends javax.swing.JFrame {
         public int id;
         
         public int parentPathId;
+    }
+    
+    /*
+     * Misc Helpers
+    */
+    
+    // Gets an unused switch id for the current zone.
+    public int getValidSwitchInZone() {
+        return getValidSwitchInZone(curZoneArc);
+    }
+    
+    // Gets an unused switch id for a specified zone.  
+    public int getValidSwitchInZone(StageArchive zoneArc) {
+        // Make a list of all the used switch IDs.
+        ArrayList<Integer> list = new ArrayList<>();
+        list.addAll(getUniqueSwitchesInZone(zoneArc));
+        
+        // Generate an ID based on this list.
+        int returnedSwitchID = generateUniqueSwitchID(list, false);
+        
+        // Show a funny prompt if they've used all the valid switches.
+        if (returnedSwitchID==-1) 
+            JOptionPane.showMessageDialog(parentForm, "Congratulations! You have used 128 switches! There's no way you unintentionally did this...");
+        
+        return returnedSwitchID;
+    }
+    
+    // Gets an unused switch id for the current galaxy.
+    public int getValidSwitchInGalaxy() {
+        return getValidSwitchInGalaxy(zoneArchives);
+    }
+    
+    // Gets an unused switch id for a hashmap of zone archives.
+    public int getValidSwitchInGalaxy(HashMap<String, StageArchive> zoneArcs) {
+        ArrayList<Integer> list = new ArrayList<>();
+        
+        // Add the used switches across all zones given to a list.
+        for (StageArchive zone : zoneArcs.values()) {
+            list.addAll(getUniqueSwitchesInZone(zone));
+        }
+        
+        // Generate a switch ID based on this list.
+        int returnSwitchID = generateUniqueSwitchID(list, true);
+        
+        // Show a funny prompt if they've used all the valid switches.
+        if (returnSwitchID==-1) 
+            JOptionPane.showMessageDialog(parentForm, "Congratulations! You have used 128 switches! There's no way you unintentionally did this...");
+        
+        return returnSwitchID;
+    }
+    
+    // Generate a switch ID based on an array list of used switch IDs. 
+    // Specify if you want it to generate a switch between 0-127 (False) or 1000-1127 (True).
+    // This will return -1 if no valid switch ID was found.
+    public int generateUniqueSwitchID(ArrayList<Integer> list, boolean isGalaxyMode) {
+        // Set the starting switch ID based on isGalaxyMode.
+        int switchID = 0;
+        if (isGalaxyMode) {
+            switchID = 1000;
+        }
+        int startingSwitchID = switchID;
+        
+        // Go through the list and find the first unique Switch ID.
+        while (list.contains(switchID) && switchID < startingSwitchID+128) {
+            switchID++;
+        }
+        
+        // If the first switch ID that matches is not a valid switch ID, return -1.
+        if (switchID > startingSwitchID+127) {
+            switchID = -1;
+        }
+        
+        return switchID;
+    }
+    
+    // Returns a set hash set of all switch IDs used in the current zone.
+    public Set<Integer> getUniqueSwitchesInZone() {
+        return getUniqueSwitchesInZone(curZoneArc);
+    }
+    
+    // Give a zone's StageArchive and it will return a hash set of all switch IDs used in that zone.
+    public Set<Integer> getUniqueSwitchesInZone(StageArchive zoneArc) {
+        // Using a hash set because it does not allow for duplicates
+        Set<Integer> set = new HashSet<>(); 
+        
+        String[] switchFieldList = {"SW_APPEAR", "SW_DEAD", "SW_A", "SW_B", "SW_AWAKE", "SW_PARAM", "SW_SLEEP"};
+        
+        // Grab the SwitchID for all objects
+        for (List<AbstractObj> layers : zoneArc.objects.values()) {
+            for (AbstractObj obj : layers) {
+                for (String field : switchFieldList) {
+                    int switchId = obj.data.getInt(field, -1);
+                    
+                    // Add each switch ID seen to a hash set
+                    if (switchId!=-1) {
+                        set.add(switchId);
+                    }
+                }
+            }
+        }
+        
+        return set;
+    }
+     
+    private HashMap<String, StageArchive> replaceSwitchID(int switchIdToReplace, int switchIdToReplaceWith, HashMap<String, StageArchive> zoneArcs) {
+        return replaceSwitchID(switchIdToReplace, switchIdToReplaceWith, zoneArcs, "");
+    }
+    
+    private HashMap<String, StageArchive> replaceSwitchID(int switchIdToReplace, int switchIdToReplaceWith, HashMap<String, StageArchive> zoneArcs, String zoneName) {
+        String[] switchFieldList = {"SW_APPEAR", "SW_DEAD", "SW_A", "SW_B", "SW_AWAKE", "SW_PARAM", "SW_SLEEP"};
+        
+        for (StageArchive zoneArc : zoneArcs.values()) {
+            if (zoneName.equals(zoneArc.stageName) || zoneName.isBlank()) { // for zone specific replacements
+                for (List<AbstractObj> layers : zoneArc.objects.values()) {
+                    for (AbstractObj obj : layers) {
+                        for (String field : switchFieldList) {
+                            int switchId = obj.data.getInt(field, -1);
+
+                            if (switchId == switchIdToReplace)
+                                obj.data.put(field, switchIdToReplaceWith);
+                        }
+                    }
+                }
+            }
+        }
+        
+        return zoneArcs;
     }
 }

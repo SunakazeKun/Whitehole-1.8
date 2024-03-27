@@ -455,7 +455,7 @@
                       <SubComponents>
                         <Component class="javax.swing.JLabel" name="lblZones">
                           <Properties>
-                            <Property name="text" type="java.lang.String" value="Zones:"/>
+                            <Property name="text" type="java.lang.String" value=" Zones: "/>
                           </Properties>
                         </Component>
                         <Component class="javax.swing.JButton" name="btnAddZone">
@@ -479,6 +479,8 @@
                           <Events>
                             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDeleteZoneActionPerformed"/>
                           </Events>
+                        </Component>
+                        <Component class="javax.swing.JToolBar$Separator" name="sepZones">
                         </Component>
                         <Component class="javax.swing.JButton" name="btnEditZone">
                           <Properties>
@@ -513,6 +515,7 @@
                             <Property name="selectionMode" type="int" value="0"/>
                           </Properties>
                           <Events>
+                            <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="listZonesMouseClicked"/>
                             <EventHandler event="valueChanged" listener="javax.swing.event.ListSelectionListener" parameters="javax.swing.event.ListSelectionEvent" handler="listZonesValueChanged"/>
                           </Events>
                         </Component>

@@ -50,7 +50,7 @@
   <SubComponents>
     <Component class="javax.swing.JLabel" name="label">
       <Properties>
-        <Property name="text" type="java.lang.String" value="&lt;html&gt;&#xa;&lt;h2&gt;Whitehole&lt;/h2&gt;&#xa;A level editor for Super Mario Galaxy and Super Mario Galaxy 2.&lt;br&gt;&#xa;Whitehole is free software and shouldn&apos;t be provides as a part&lt;br&gt;&#xa;of a paid software package.&#xa;&#xa;&lt;h2&gt;Credits&lt;/h2&gt;&#xa;Arisotura, TheSunCat, Aurum, JuPaHe64, PhantomWings, Treeki,&lt;br&gt;&#xa;Super Hackio, shibbo, NWPlayer123, Bussun, IonicPixels, thakis,&lt;br&gt;&#xa;yaz0r, Lord-Giganticus, groepaz, Dirbaio, Rob Camick&lt;br&gt;&#xa;&lt;/html&gt;"/>
+        <Property name="text" type="java.lang.String" value="&lt;html&gt; &lt;h2&gt;Whitehole&lt;/h2&gt; A level editor for Super Mario Galaxy and Super Mario Galaxy 2.&lt;br&gt; Whitehole is free software and shouldn&apos;t be provided as a part&lt;br&gt; of a paid software package.  &lt;h2&gt;Credits&lt;/h2&gt; Arisotura, TheSunCat, Aurum, JuPaHe64, PhantomWings, Treeki,&lt;br&gt; Super Hackio, shibbo, NWPlayer123, Bussun, IonicPixels, thakis,&lt;br&gt; yaz0r, Lord-Giganticus, groepaz, Dirbaio, Rob Camick, and AwesomeTMC.&lt;br&gt; &lt;/html&gt;"/>
       </Properties>
     </Component>
   </SubComponents>

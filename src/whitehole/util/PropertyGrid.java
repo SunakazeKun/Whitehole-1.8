@@ -35,6 +35,7 @@ import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableCellRenderer;
 import whitehole.editor.ObjectSelectForm;
+import whitehole.editor.GalaxyEditorForm;
 
 public class PropertyGrid extends JTable {
     public PropertyGrid(JFrame parent) {
@@ -89,7 +90,7 @@ public class PropertyGrid extends JTable {
         return this;
     }
     
-    public PropertyGrid addField(String name, String caption, String type, java.util.List choices, Object val, String info) {
+    public PropertyGrid addField(String name, String caption, String type, java.util.List choices, Object val, String toolTipText) {
         if (fields.containsKey(name)) {
             if (!val.equals(fields.get(name).value))
                 fields.get(name).value = null;
@@ -106,7 +107,7 @@ public class PropertyGrid extends JTable {
         field.label = new JLabel(caption);
         field.renderer = null;
         field.tip = new JToolTip();
-        field.tip.setToolTipText(info);
+        field.tip.setToolTipText(toolTipText);
         
         switch (type) {
             case "text":
@@ -134,6 +135,10 @@ public class PropertyGrid extends JTable {
                 
             case "objname":
                 field.editor = new ObjectCellEditor(field); 
+                break;
+                
+            case "switchid":
+                field.editor = new SwitchCellEditor(field);
                 break;
         }
         
@@ -673,6 +678,137 @@ public class PropertyGrid extends JTable {
         public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int col) {
             textfield.setText(value == null ? "<multiple>" : value.toString());
             return container;
+        }
+    }
+    
+        public class SwitchCellEditor extends AbstractCellEditor implements TableCellEditor {
+        JPanel mainPanel;
+        JPanel buttonPanel;
+        JTextField textfield;
+        FlowLayout flowLayout;
+        javax.swing.JButton zoneSwitchButton;
+        javax.swing.JButton galaxySwitchButton;
+        Field field;
+
+        public SwitchCellEditor(Field f) {
+            field = f;
+            
+            // Create panel to hold layout
+            mainPanel = new JPanel();
+            
+            // Set the layout manager for the panel
+            mainPanel.setLayout(new BorderLayout());
+            
+            // Create text field and set its width
+            textfield = new JTextField(f.value.toString());
+            textfield.setPreferredSize(new Dimension(300, 20));
+            
+            // Add event listener for textfield
+            textfield.addKeyListener(new KeyListener() {
+                @Override
+                public void keyPressed(KeyEvent evt) {}
+                @Override
+                public void keyTyped(KeyEvent evt) {}
+                @Override
+                public void keyReleased(KeyEvent evt) {
+                    Object val = textfield.getText();
+                    boolean isValidSwitchID = true;
+                    try {
+                        int switchID = Integer.parseInt((String)val);
+                        val = switchID;
+                        if ((switchID > -2 && switchID < 128) || (switchID > 999 && switchID < 1128)) {
+                            textfield.setForeground(Color.getColor("text"));
+                            field.value = val;
+                            eventListener.propertyChanged(field.name, val);
+                        } else
+                            isValidSwitchID = false;
+                    }
+                    catch (NumberFormatException ex) {
+                        isValidSwitchID = false;
+                    }
+                    if (!isValidSwitchID)
+                        textfield.setForeground(new Color(0xFF4040));
+                }
+            });
+            textfield.requestFocusInWindow();
+            
+            // Add buttons and set their size
+            zoneSwitchButton = new javax.swing.JButton("Z");
+            zoneSwitchButton.setPreferredSize(new Dimension(22, 19));
+            galaxySwitchButton = new javax.swing.JButton("G");
+            galaxySwitchButton.setPreferredSize(new Dimension(22, 19));
+            
+            // Add action listeners for the buttons
+            zoneSwitchButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    // Grab the current GalaxyEditorForm instance. Please change this if there's a better way.
+                    GalaxyEditorForm stage = ((GalaxyEditorForm) mainPanel.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent());
+                    
+                    // Get a valid zone-exclusive switch
+                    Object val = stage.getValidSwitchInZone();
+                    
+                    if (!val.equals(-1)) { // only replace the value if it's valid
+                        textfield.setText(String.valueOf(val));
+                    
+                        // Set the field's value to the int and put this into the stage data
+                        field.value = val;
+                        eventListener.propertyChanged(field.name, val);
+                    }
+                }
+            });
+            
+            galaxySwitchButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent evt) {
+                    // Grab the current GalaxyEditorForm instance. Please change this if there's a better way.
+                    GalaxyEditorForm stage = ((GalaxyEditorForm) mainPanel.getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent().getParent());
+                    
+                    // Get a valid galaxy wide switch
+                    Object val = stage.getValidSwitchInGalaxy();
+                    
+                    if (!val.equals(-1)) { // only replace the value if it's valid
+                        textfield.setText(String.valueOf(val));
+                    
+                        // Set the field's value to the int and put this into the stage data
+                        field.value = val;
+                        eventListener.propertyChanged(field.name, val);
+                    }
+                }
+            });
+            
+            // Make a new panel for the buttons
+            buttonPanel = new JPanel();
+            
+            // Set the layout manager for the button panel
+            flowLayout = new FlowLayout();
+            flowLayout.setAlignment(FlowLayout.CENTER);
+            flowLayout.setHgap(0);
+            flowLayout.setVgap(0);
+            buttonPanel.setLayout(flowLayout);
+            
+            // Add the buttons to their panel
+            buttonPanel.add(zoneSwitchButton, BorderLayout.WEST);
+            buttonPanel.add(galaxySwitchButton, BorderLayout.EAST);
+            
+            // Add them all to the main panel
+            mainPanel.add(textfield, BorderLayout.CENTER);
+            mainPanel.add(buttonPanel, BorderLayout.EAST);
+            
+            // If the current form is a zone editor, disable the galaxy switch button.
+            if (fields.get("zone")==null)
+                galaxySwitchButton.setEnabled(false);
+        }
+
+        @Override
+        public Object getCellEditorValue() {
+            return textfield.getText();
+        }
+
+        @Override
+        public Component getTableCellEditorComponent(JTable table, Object value, boolean isSelected, int row, int col) {
+            textfield.setText(value == null ? "<multiple>" : value.toString());
+            return mainPanel;
         }
     }
     
